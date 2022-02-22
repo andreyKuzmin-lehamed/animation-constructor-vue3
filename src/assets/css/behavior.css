@@ -1,0 +1,13 @@
+.pushable {
+    cursor: pointer;
+    transition-duration: 250ms;
+}
+
+.pushable:hover {
+    transform: scale(1.01);
+}
+
+.pushable:active {
+    transform: scale(0.98);
+    box-shadow: none;
+}
