@@ -2,7 +2,9 @@
 import CustomTitle from '@/components/ui/CustomTitle.vue';
 import CustomButton from '@/components/ui/CustomButton.vue';
 import CustomSelectInput from '@/components/ui/CustomSelectInput.vue';
-import { reactive, ref } from 'vue';
+import { reactive, ref, type Ref } from 'vue';
+import CustomTextInput from '../components/ui/CustomTextInput.vue';
+import CustomNumberInput from '../components/ui/CustomNumberInput.vue';
 const log = (e: any) => {
     console.log(e)
 }
@@ -24,6 +26,9 @@ const options = ref([
     "option 9",
     "option 10",
 ])
+
+const testText :Ref<string> = ref("")
+const testNumber :Ref<number> = ref(0)
 
 const createOption = (option :string) => {
     options.value.unshift(option)
@@ -56,36 +61,9 @@ const deleteOption = (option :string) => {
         height="32px"
         >
     </CustomSelectInput>
-    <CustomSelectInput 
-        title="Test Select title"
-        placeholder="Select option"
-        :options="options"
-        @created="createOption"
-        @delete="deleteOption"
-        width="240px"
-        height="32px"
-        >
-    </CustomSelectInput>
-    <CustomSelectInput 
-        title="Test Select title"
-        placeholder="Select option"
-        :options="options"
-        @created="createOption"
-        @delete="deleteOption"
-        width="240px"
-        height="32px"
-        >
-    </CustomSelectInput>
-    <CustomSelectInput 
-        title="Test Select title"
-        placeholder="Select option"
-        :options="options"
-        @created="createOption"
-        @delete="deleteOption"
-        width="240px"
-        height="32px"
-        >
-    </CustomSelectInput>
+
+    <CustomTextInput title="Test title" v-model="testText"></CustomTextInput>
+    <CustomNumberInput title="Test number" v-model.number="testNumber" :width="500" :min="-100" :max="300" :step="20"></CustomNumberInput>
 </template>
 
 <style scoped>

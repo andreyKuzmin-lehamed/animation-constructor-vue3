@@ -16,6 +16,12 @@
     justify-content: flex-start;
     align-items: flex-start;
 }
+.flex-row-start-center {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+}
 .flex-row-start-end {
     display: flex;
     flex-direction: row;
@@ -27,4 +33,10 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+}
+.flex-row-between-end {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
 }

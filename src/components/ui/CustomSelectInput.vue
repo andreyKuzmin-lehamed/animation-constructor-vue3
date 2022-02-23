@@ -15,8 +15,8 @@ const props = defineProps({
         type: Array,
         required: true
     },
-    width: String,
-    height: String,
+    width: [String, Number],
+    height: [String, Number]
 })
 
 const style = computed(()=>{
@@ -115,6 +115,7 @@ const clearHoveredOption = () => {
                     >Create new option</p>
                     <input  class="custom-select-input--input"
                             @click.stop
+                            @keydown.enter="createNewOption"
                             v-show="creating" 
                             type="text" 
                             ref="newOptionInput" 
@@ -245,7 +246,23 @@ const clearHoveredOption = () => {
 .custom-select-input--arrow {
 }
 .custom-select-input--delete {
+    padding: 4px;
+    width: 10px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    border: 1px solid red;
 }
+
+.custom-select-input--delete:hover {
+    transition-duration: 32s;
+    transform: rotate(9000deg);
+    padding: 4px;
+    width: 10px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    border: 1px solid red;
+}
+
 
 .list-enter-active,
 .list-leave-active {
