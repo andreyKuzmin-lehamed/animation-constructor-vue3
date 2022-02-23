@@ -38,7 +38,6 @@ const onchange = (e :any) => {
         if (value < props?.min) value = props.min
         if (value > props?.max) value = props.max
         const nearestStep = calcNearestStep(value - props?.min)
-        console.log({nearestStep})
         emit('update:modelValue', props?.min + nearestStep * props?.step)
         nextTick(()=>setSliderItemPosition())
     }
@@ -52,9 +51,9 @@ const cursor :Ref<string> = ref("")
 
 const changeModelValue = (e :any) => {
     if (e.target.className === 'custom-number-input--slider-container') {
-        sliderLeftRawPosition.value = e.layerX
+        sliderLeftRawPosition.value = e.layerX - 4
     } else if (e.target.className === 'custom-number-input--slider-item') {
-        sliderLeftRawPosition.value = e.target.offsetLeft + e.layerX
+        sliderLeftRawPosition.value = e.target.offsetLeft + e.layerX - 4
     }
     if (sliderLeftRawPosition.value < 0) sliderLeftRawPosition.value = 0
     if (props?.width !== undefined && sliderLeftRawPosition.value > props.width * 0.48) {
@@ -63,11 +62,6 @@ const changeModelValue = (e :any) => {
 
     if (!props?.width) return
     const factStep = Math.abs(props?.max - props?.min) / Math.round(props?.width * 0.48)
-    console.log(props?.width * 0.48)
-    console.log({factStep})
-
-    console.log({sliderLeftRawPosition: sliderLeftRawPosition.value})
-    console.log(sliderLeftRawPosition.value * factStep)
     const nearestStep = calcNearestStep(sliderLeftRawPosition.value * factStep)
     emit("update:modelValue", props?.min + nearestStep * props?.step)
     nextTick(()=>setSliderItemPosition())

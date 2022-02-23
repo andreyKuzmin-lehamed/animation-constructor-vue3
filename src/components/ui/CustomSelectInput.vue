@@ -188,7 +188,7 @@ const clearHoveredOption = () => {
     left: 0;
     width: 100vw;
     height: 100vh;
-    background-color: rgba(110, 110, 110, 0.7);
+    background-color: rgb(253 255 155 / 60%);;
     z-index: 900;
 }
 .custom-select-input--line {

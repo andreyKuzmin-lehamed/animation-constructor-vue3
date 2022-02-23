@@ -63,7 +63,7 @@ const deleteOption = (option :string) => {
     </CustomSelectInput>
 
     <CustomTextInput title="Test title" v-model="testText"></CustomTextInput>
-    <CustomNumberInput title="Test number" v-model.number="testNumber" :width="500" :min="-100" :max="300" :step="20"></CustomNumberInput>
+    <CustomNumberInput title="Test number" v-model.number="testNumber" :width="500" :min="-100" :max="300" :step="1"></CustomNumberInput>
 </template>
 
 <style scoped>
