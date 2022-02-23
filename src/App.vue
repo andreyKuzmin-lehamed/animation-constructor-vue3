@@ -13,7 +13,7 @@ body {
 }
 * {
   margin: 0;
-  font-size: 12px;
+  font-size: 14px;
   color: #5C5C5C;
 }
 </style>

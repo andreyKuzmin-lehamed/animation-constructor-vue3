@@ -52,6 +52,8 @@ const deleteOption = (option :string) => {
         :options="options"
         @created="createOption"
         @delete="deleteOption"
+        width="240px"
+        height="32px"
         >
     </CustomSelectInput>
     <CustomSelectInput 
@@ -60,6 +62,8 @@ const deleteOption = (option :string) => {
         :options="options"
         @created="createOption"
         @delete="deleteOption"
+        width="240px"
+        height="32px"
         >
     </CustomSelectInput>
     <CustomSelectInput 
@@ -68,6 +72,8 @@ const deleteOption = (option :string) => {
         :options="options"
         @created="createOption"
         @delete="deleteOption"
+        width="240px"
+        height="32px"
         >
     </CustomSelectInput>
     <CustomSelectInput 
@@ -76,6 +82,8 @@ const deleteOption = (option :string) => {
         :options="options"
         @created="createOption"
         @delete="deleteOption"
+        width="240px"
+        height="32px"
         >
     </CustomSelectInput>
 </template>

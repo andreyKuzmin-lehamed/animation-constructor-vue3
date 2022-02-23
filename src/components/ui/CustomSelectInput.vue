@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import CustomTitle from '@/components/ui/CustomTitle.vue';
-import { nextTick, ref, type Ref } from 'vue';
+import { computed, nextTick, ref, type Ref } from 'vue';
 import CustomButton from './CustomButton.vue';
 const props = defineProps({
     title: {
@@ -14,6 +14,15 @@ const props = defineProps({
     options: {
         type: Array,
         required: true
+    },
+    width: String,
+    height: String,
+})
+
+const style = computed(()=>{
+    return {
+        width: typeof props?.width === "string" ? props.width : props.width + "px",
+        height: typeof props?.height === "string" ? props.height : props.height + "px"
     }
 })
 
@@ -73,7 +82,8 @@ const clearHoveredOption = () => {
 
 <template>
     <CustomTitle :title="props?.title">
-        <div class="custom-select-input--container">
+        <div class="custom-select-input--container" :style="style">
+            
             <div
                 class="custom-select-input--line flex-row-between-center"
                 @click.stop="openOptions"
@@ -81,11 +91,15 @@ const clearHoveredOption = () => {
                 <p class="custom-select-input--selected">{{ selected || props?.placeholder }}</p>
                 <img class="custom-select-input--arrow" src="../../assets/images/select-arrow.svg" />
             </div>
+
+
             <div class="custom-select-input--background" v-if="showOptions"></div>
-            <div class="custom-select-input--options" v-if="showOptions">
+            <div class="custom-select-input--options" v-if="showOptions" :style="{width: props?.width}">
+                
                 <div
                     class="custom-select-input--line custom-select-input--selected-line flex-row-between-center"
                     @click.stop="openOptions"
+                    :style="style"
                 >
                     <p class="custom-select-input--selected">{{ selected || props?.placeholder }}</p>
                     <img
@@ -94,7 +108,7 @@ const clearHoveredOption = () => {
                     />
                 </div>
 
-                <div class="custom-select-input--line custom-select-input--create-line flex-row-between-center" @click.stop="createOption">
+                <div class="custom-select-input--line custom-select-input--create-line flex-row-between-center" @click.stop="createOption" :style="style">
                     <p
                         v-show="!creating"
                         class="custom-select-input--create"
@@ -106,22 +120,16 @@ const clearHoveredOption = () => {
                             ref="newOptionInput" 
                             v-model="newOption" />
                     <div v-show="creating"  class="custom-select-input--buttons flex-row-between-center">
-                        <CustomButton
-                            text="Ok"
-                            width="52px"
-                            height="16px"
-                            bg="#ffffff"
-                            color="#30ab1c"
-                            @click="createNewOption"
-                        ></CustomButton>
-                        <CustomButton
-                            text="Cancel"
-                            width="52px"
-                            height="16px"
-                            bg="#ffffff"
-                            color="#AB8C1C"
-                            @click="cancelCreating"
-                        ></CustomButton>
+                            <img
+                                class="custom-select-input--create-accept"
+                                @click.stop="createNewOption"
+                                src="../../assets/images/select-accept.svg"
+                            />
+                            <img
+                                class="custom-select-input--create-cancel"
+                                @click.stop="cancelCreating"
+                                src="../../assets/images/select-delete.svg"
+                            />
                     </div>
                 </div>
                 <div class="flex-col-start-start custom-select-input--scrollable">
@@ -131,6 +139,7 @@ const clearHoveredOption = () => {
                             :key="option"
                             :class="{'custom-select-input--line--hovered': hoveredOption === option}"
                             class="custom-select-input--line flex-row-between-center"
+                            :style="style"
                             @click.stop="select(option)"
                             @mouseenter="setHoveredOption(option)"
                             @mouseleave="clearHoveredOption"
@@ -153,8 +162,8 @@ const clearHoveredOption = () => {
 <style scoped>
 .custom-select-input--container {
     position: relative;
-    width: 300px;
-    min-height: 24px;
+    width: 120px;
+    min-height: 32px;
     background: #ffffff;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 4px;
@@ -163,9 +172,9 @@ const clearHoveredOption = () => {
     position: absolute;
     top: 0;
     left: 0;
-    width: 300px;
-    min-height: 24px;
-    max-height: 132px;
+    width: 120px;
+    min-height: 32px;
+    max-height: 240px;
     overflow: hidden;
     background: #ffffff;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -183,7 +192,7 @@ const clearHoveredOption = () => {
 }
 .custom-select-input--line {
     cursor: pointer;
-    min-height: 24px;
+    min-height: 32px;
     width: 100%;
     padding: 0 8px;
     box-sizing: border-box;
@@ -203,20 +212,33 @@ const clearHoveredOption = () => {
 .custom-select-input--input {
     border: none;
     outline: none;
-    height: 80%;
-    width: 55%;
+    height: 16px;
+    width: 75%;
     border-radius: 4px;
 }
 .custom-select-input--scrollable {
     overflow-y: scroll;
-    max-height: 84px;
+    max-height: 240px;
     width: 100%;
 }
 .custom-select-input--scrollable::-webkit-scrollbar {
     display: none;
 }
 .custom-select-input--buttons {
-    width: 110px;
+}
+.custom-select-input--create-accept {
+    padding: 4px;
+    width: 10px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    margin-right: 4px;
+}
+.custom-select-input--create-cancel {
+    padding: 4px;
+    width: 10px;
+    border-radius: 20px;
+    background-color: #ffffff;
+
 }
 .custom-select-input--selected {
 }
