@@ -4,6 +4,7 @@ import CustomButton from '@/components/ui/CustomButton.vue';
 import CustomSelectInput from '@/components/ui/CustomSelectInput.vue';
 import { reactive, ref, type Ref } from 'vue';
 import CustomTextInput from '../components/ui/CustomTextInput.vue';
+import CustomTextAreaInput from '../components/ui/CustomTextAreaInput.vue';
 import CustomNumberInput from '../components/ui/CustomNumberInput.vue';
 const log = (e: any) => {
     console.log(e)
@@ -63,6 +64,7 @@ const deleteOption = (option :string) => {
     </CustomSelectInput>
 
     <CustomTextInput title="Test title" v-model="testText"></CustomTextInput>
+    <CustomTextAreaInput title="Test title" v-model="testText"></CustomTextAreaInput>
     <CustomNumberInput title="Test number" v-model.number="testNumber" :width="500" :min="-100" :max="300" :step="1"></CustomNumberInput>
 </template>
 
